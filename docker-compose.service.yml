@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+  auth-service:
+    container_name: lb-auth-service
+    image: sanbul/lb-auth-service
+    restart: always
+    networks:
+      - docker_tripper
+    env_file:
+      - ./apps/auth-service/.env
+    ports:
+      - '${AUTH_SERVICE_PORT}:3001'
+
+networks:
+  docker_mcud:
+    external: true
