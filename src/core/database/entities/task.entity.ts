@@ -1,10 +1,10 @@
 import { ETaskStatus } from '@core/enums';
 import { Entity, Enum, ManyToOne, Property } from '@mikro-orm/core';
 import { BaseEntity } from '../base';
-import User from './user.entity';
+import { User } from './user.entity';
 
 @Entity({ tableName: 'tasks' })
-class Task extends BaseEntity {
+export class Task extends BaseEntity {
   @Property({ nullable: false, type: 'varchar' })
   title: string;
 
@@ -17,5 +17,3 @@ class Task extends BaseEntity {
   @ManyToOne({ entity: () => User })
   user: User;
 }
-
-export default Task;

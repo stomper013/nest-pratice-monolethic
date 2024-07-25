@@ -1,8 +1,12 @@
+import { WithSoftDelete } from '@core/common';
 import { TimestampUtil } from '@core/utils';
-import { PrimaryKey, Property } from '@mikro-orm/core';
+import { OptionalProps, PrimaryKey, Property } from '@mikro-orm/core';
 import { v4 } from 'uuid';
 
-export class BaseEntity {
+@WithSoftDelete()
+export class BaseEntity<Optional = never> {
+  [OptionalProps]?: 'createdAt' | 'updatedAt' | 'deletedAt' | Optional;
+
   @PrimaryKey({ type: 'uuid' })
   id = v4();
 

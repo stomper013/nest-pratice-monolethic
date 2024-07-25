@@ -1,27 +1,20 @@
+import { EAppEnvironment } from '@core/enums';
+
 export default () => ({
   port: process.env.PORT || '3000',
   rootApi: 'api',
-  // initAccount: {
-  //   username: process.env.INIT_ADMIN_USERNAME || 'admin',
-  //   password: process.env.INIT_ADMIN_PWD || 'password',
-  //   exchangePassword: process.env.INIT_ADMIN_EX_PWD || 'expassword',
-  //   phone: process.env.INIT_ADMIN_PHONE || '0123456789',
-  // },
+  initAccount: {
+    username: process.env.INIT_USERNAME || 'mcud',
+    password: process.env.INIT_PWD || 'mcud_assessment',
+  },
   db: {
     postgres: {
-      databaseConfig: {
-        type: process.env.DB_TYPE || 'postgres',
-        synchronize: false,
-        logging: false,
-        host: process.env.DB_HOST || '127.0.0.1',
-        port: process.env.DB_PORT || 5432,
-        username: process.env.DB_USER || 'username',
-        password: process.env.DB_PWD || 'password',
-        extra: {
-          connectionLimit: 10,
-        },
-        autoLoadEntities: true,
-      },
+      debug: process.env.ENVIRONMENT == EAppEnvironment.Dev ? true : false,
+      host: process.env.DB_HOST || '127.0.0.1',
+      port: process.env.DB_PORT || 5432,
+      user: process.env.DB_USER || 'username',
+      password: process.env.DB_PWD || 'password',
+      dbName: process.env.DB_NAME,
     },
   },
   jwt: {

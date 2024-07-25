@@ -23,7 +23,6 @@
           "primary": false,
           "nullable": false,
           "length": 6,
-          "default": "'2024-07-25T12:01:22.474Z'",
           "mappedType": "datetime"
         },
         "updated_at": {
@@ -34,7 +33,6 @@
           "primary": false,
           "nullable": false,
           "length": 6,
-          "default": "'2024-07-25T12:01:22.474Z'",
           "mappedType": "datetime"
         },
         "deleted_at": {
@@ -116,7 +114,6 @@
           "primary": false,
           "nullable": false,
           "length": 6,
-          "default": "'2024-07-25T12:01:22.474Z'",
           "mappedType": "datetime"
         },
         "updated_at": {
@@ -127,7 +124,6 @@
           "primary": false,
           "nullable": false,
           "length": 6,
-          "default": "'2024-07-25T12:01:22.474Z'",
           "mappedType": "datetime"
         },
         "deleted_at": {

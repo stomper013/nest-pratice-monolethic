@@ -1,2 +1,2 @@
-export * from './query.enum';
+export * from './common.enum';
 export * from './task.enum';
