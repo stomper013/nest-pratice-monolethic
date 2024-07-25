@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsDateString, IsNumber, IsOptional } from 'class-validator';
-import * as moment from 'moment';
+import moment from 'moment';
 import { IPagination, ITimerQuery } from '@core/interfaces/request';
 
 export class PaginateDto implements IPagination {
