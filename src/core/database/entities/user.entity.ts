@@ -11,5 +11,5 @@ export class User extends BaseEntity {
   password: string;
 
   @OneToMany(() => Task, (task) => task.user, { orphanRemoval: true })
-  tasks = new Collection<Task>(this);
+  tasks? = new Collection<Task>(this);
 }

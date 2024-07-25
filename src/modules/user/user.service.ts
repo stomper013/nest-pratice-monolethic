@@ -29,7 +29,7 @@ export class UserService extends BaseRepository implements OnModuleInit {
   async onModuleInit() {
     const em = this.entityManager.fork();
     try {
-      const initUserData = this.configService.get<Partial<User>>('initAccount');
+      const initUserData = this.configService.get<User>('initAccount');
       if (!initUserData) return;
 
       const checkExisted = await this.getOne(em, User, {
@@ -37,7 +37,7 @@ export class UserService extends BaseRepository implements OnModuleInit {
       });
       if (checkExisted) return;
 
-      const record = await this.insert(em, User, initUserData);
+      const record = await this.createUser(initUserData);
 
       this.logger.verbose('Default user initialized');
 

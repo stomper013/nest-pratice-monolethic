@@ -18,6 +18,7 @@ export default () => ({
     },
   },
   jwt: {
+    secretKey: process.env.SECRET_KEY || 'mcud_assessment_secret_key',
     jwtSecretExpirePeriod: process.env.JWT_SECRET_EXPIRE_PERIOD || 1,
     jwtSecretExpireDigit: process.env.JWT_SECRET_EXPIRE_DIGIT || 'day',
     jwtRefreshSecretExpirePeriod:
