@@ -8,16 +8,16 @@ export class BaseEntity<Optional = never> {
   [OptionalProps]?: 'createdAt' | 'updatedAt' | 'deletedAt' | Optional;
 
   @PrimaryKey({ type: 'uuid' })
-  id = v4();
+  id? = v4();
 
   @Property({ type: 'timestamp' })
-  createdAt = TimestampUtil.getCurrentTimestamp();
+  createdAt? = TimestampUtil.getCurrentTimestamp();
 
   @Property({
     type: 'timestamp',
     onUpdate: () => TimestampUtil.getCurrentTimestamp(),
   })
-  updatedAt = TimestampUtil.getCurrentTimestamp();
+  updatedAt? = TimestampUtil.getCurrentTimestamp();
 
   @Property({ type: 'timestamp', nullable: true, default: null })
   deletedAt?: Date;

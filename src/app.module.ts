@@ -2,9 +2,10 @@ import configuration from '@core/config/configuration';
 import { DatabaseModule } from '@core/database';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from 'modules/auth';
 import { UserModule } from 'modules/user/user.module';
 
-const appModules = [UserModule];
+const appModules = [UserModule, AuthModule];
 
 @Module({
   imports: [

@@ -10,6 +10,12 @@ export class User extends BaseEntity {
   @Property({ nullable: false, type: 'varchar' })
   password: string;
 
+  @Property({ nullable: true, type: 'varchar' })
+  token?: string;
+
+  @Property({ nullable: true, type: 'timestamp' })
+  tokenExpireDate?: Date;
+
   @OneToMany(() => Task, (task) => task.user, { orphanRemoval: true })
-  tasks = new Collection<Task>(this);
+  tasks? = new Collection<Task>(this);
 }

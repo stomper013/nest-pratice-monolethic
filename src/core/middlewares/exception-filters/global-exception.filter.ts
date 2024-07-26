@@ -15,9 +15,7 @@ const getStatusCode = <T>(exception: T): number => {
 };
 
 const getErrorMessage = <T>(exception: T): Array<T> | T => {
-  return exception instanceof HttpException
-    ? exception['response']['message']
-    : exception;
+  return exception instanceof HttpException ? exception['response'] : exception;
 };
 
 @Catch()

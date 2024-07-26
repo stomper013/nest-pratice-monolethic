@@ -7,3 +7,10 @@ export enum Sort {
   Asc = 'ASC',
   Desc = 'DESC',
 }
+
+export enum DateUnit {
+  Day = 'day',
+  Minute = 'minute',
+  Second = 'second',
+  Month = 'month',
+}
