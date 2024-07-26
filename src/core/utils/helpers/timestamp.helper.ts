@@ -4,7 +4,7 @@ import { NumberUtil } from './number.helper';
 
 export class TimestampUtil {
   static getCurrentTimestamp(): Date {
-    return moment().toDate();
+    return moment().utc().toDate();
   }
 
   static addTime(

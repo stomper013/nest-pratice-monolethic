@@ -1,20 +1,25 @@
-import { Body, Controller, Param, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
-import { UserService } from './user.service';
-import { User } from '@core/database';
+import { UserDecorator } from '@core/common';
+import { IJwtPayload } from '@core/interfaces';
+import { JwtGuard } from '@core/middlewares';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UpdatePasswordDto } from './dto';
+import { UserService } from './user.service';
 
 @Controller('user')
 @ApiTags('User')
+@ApiBearerAuth()
+@UseGuards(JwtGuard)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post('update/password/:id')
+  @Post('update/password')
   async updatePassword(
-    @Param('id') id: string,
+    @UserDecorator() user: IJwtPayload,
     @Body() body: UpdatePasswordDto,
-  ): Promise<User> {
+  ): Promise<boolean> {
+    const { userId } = user;
     const { newPassword } = body;
-    return this.userService.updatePassword(id, newPassword);
+    return this.userService.updatePassword(userId, newPassword);
   }
 }

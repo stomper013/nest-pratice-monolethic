@@ -1,2 +1,3 @@
 export * from './interceptors';
-export * from './exception-filter';
+export * from './exception-filters';
+export * from './guards';

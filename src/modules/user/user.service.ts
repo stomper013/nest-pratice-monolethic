@@ -43,6 +43,7 @@ export class UserService extends BaseRepository implements OnModuleInit {
 
       return record;
     } catch (error) {
+      this.logger.error(error);
       throw new HttpException(
         error?.message || null,
         error?.status || HttpStatus.INTERNAL_SERVER_ERROR,
@@ -71,6 +72,7 @@ export class UserService extends BaseRepository implements OnModuleInit {
 
       return record;
     } catch (error) {
+      this.logger.error(error);
       throw new HttpException(
         error?.message || null,
         error?.status || HttpStatus.INTERNAL_SERVER_ERROR,
@@ -80,7 +82,7 @@ export class UserService extends BaseRepository implements OnModuleInit {
     }
   }
 
-  async updatePassword(id: string, newPassword: string): Promise<User> {
+  async updatePassword(id: string, newPassword: string): Promise<boolean> {
     const em = this.entityManager.fork();
     try {
       const user = await this.getOne(em, User, { id });
@@ -91,8 +93,9 @@ export class UserService extends BaseRepository implements OnModuleInit {
 
       await em.flush();
 
-      return user;
+      return true;
     } catch (error) {
+      this.logger.error(error);
       throw new HttpException(
         error?.message || null,
         error?.status || HttpStatus.INTERNAL_SERVER_ERROR,

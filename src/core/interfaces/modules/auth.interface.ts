@@ -5,16 +5,20 @@ export interface ILoginPayload {
   password: string;
 }
 
+export type IRegisterPayload = ILoginPayload;
+
 export interface IJwtResponse {
   accessToken: string;
   refreshToken: string;
   accessExpiredAt: number;
   refreshExpiredAt: number;
-  expiredDate?: Date;
+  accessExpiredDate?: Date;
+  refreshExpiredDate?: Date;
 }
 
 export interface IJwtPayload {
   userId: string;
+  username?: string;
   exp?: number;
 }
 
