@@ -1,0 +1,15 @@
+services:
+  mcud-app:
+    container_name: mcud-app
+    image: mcud-app
+    restart: always
+    networks:
+      - mcud-assessment_mcud
+    env_file:
+      - ./.env
+    ports:
+      - '${PORT}:3000'
+
+networks:
+  mcud-assessment_mcud:
+    external: true
