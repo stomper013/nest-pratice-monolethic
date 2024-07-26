@@ -184,11 +184,23 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "default": "'NOT_YET'",
           "enumItems": [
             "DONE",
             "NOT_YET"
           ],
           "mappedType": "enum"
+        },
+        "deadline": {
+          "name": "deadline",
+          "type": "timestamptz",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 6,
+          "default": "null",
+          "mappedType": "datetime"
         },
         "user_id": {
           "name": "user_id",

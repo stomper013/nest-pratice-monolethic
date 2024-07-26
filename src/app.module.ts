@@ -3,9 +3,10 @@ import { DatabaseModule } from '@core/database';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from 'modules/auth';
+import { TaskModule } from 'modules/task';
 import { UserModule } from 'modules/user/user.module';
 
-const appModules = [UserModule, AuthModule];
+const appModules = [UserModule, AuthModule, TaskModule];
 
 @Module({
   imports: [

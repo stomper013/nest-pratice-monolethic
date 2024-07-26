@@ -8,7 +8,7 @@ export class User extends BaseEntity {
   username: string;
 
   @Property({ nullable: false, type: 'varchar' })
-  password: string;
+  password?: string;
 
   @Property({ nullable: true, type: 'varchar' })
   token?: string;
