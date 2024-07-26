@@ -2,6 +2,7 @@ import { EAppEnvironment } from '@core/enums';
 
 export default () => ({
   port: process.env.PORT || '3000',
+  environment: process.env.ENVIRONMENT || 'develop',
   rootApi: 'api',
   initAccount: {
     username: process.env.INIT_USERNAME || 'mcud',

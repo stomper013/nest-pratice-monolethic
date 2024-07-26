@@ -1,7 +1,7 @@
 # Build
-FROM node:18-alpine as build
+FROM node:18-alpine AS build
 
-WORKDIR /app
+WORKDIR /build
 
 COPY package.json yarn.lock ./
 
@@ -12,24 +12,23 @@ COPY . .
 
 RUN yarn build
 
+
+
 # Export image
+FROM node:18-alpine AS main
 
-FROM node:18-alpine as main
+WORKDIR /app
 
-WORKDIR /
+COPY --from=build /build/tsconfig.json/ /app
 
-COPY --from=build /app/dist/apps/address-service/ /
+COPY --from=build /build/package.json /app
 
-COPY --from=build /app/node_modules/ /node_modules/
+COPY --from=build /build/node_modules/ /app/node_modules/
 
-COPY --from=build /app/package.json /
+COPY --from=build /build/src/core/database /app/migrate/
 
-COPY --from=build /app/grpc /grpc
+COPY --from=build /build/dist/ /app/dist/
 
-COPY --from=build /app/libs/core/databases/ /migrate/
+EXPOSE 3000
 
-COPY --from=build /app/tsconfig.json/ /
-
-EXPOSE 3007
-
-CMD yarn run migration:run -- -d ./migrate/postgres/address/ormconfig.ts && node main.js
+CMD npx mikro-orm migration:up --config ./migrate/orm.config.ts && node ./dist/main.js

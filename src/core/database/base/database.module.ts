@@ -1,6 +1,7 @@
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { join } from 'path';
 import options from '../orm.config';
 
 @Module({
@@ -10,7 +11,9 @@ import options from '../orm.config';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
         const dbConfig = configService.get('db.postgres');
-        return Object.assign(options, dbConfig);
+        return Object.assign(options, dbConfig, {
+          entitiesTs: [join(__dirname, '../**/*.entity.ts')],
+        });
       },
     }),
   ],

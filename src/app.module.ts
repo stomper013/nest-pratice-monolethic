@@ -6,7 +6,7 @@ import { AuthModule } from 'modules/auth';
 import { TaskModule } from 'modules/task';
 import { UserModule } from 'modules/user/user.module';
 
-const appModules = [UserModule, AuthModule, TaskModule];
+const appModules = [AuthModule, UserModule, TaskModule];
 
 @Module({
   imports: [
