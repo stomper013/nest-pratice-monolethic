@@ -1,0 +1,26 @@
+services:
+  postgres:
+    container_name: postgres_db
+    restart: always
+    image: postgres:latest
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PWD}
+      POSTGRES_HOST: ${DB_HOST}
+      POSTGRES_DB: ${DB_NAME}
+      PGDATA: /data/postgres
+    volumes:
+      - postgres-db:/data/postgres
+    ports:
+      - ${DB_PORT}:5432
+    networks:
+      - mcud
+
+networks:
+  mcud:
+    driver: bridge
+
+volumes:
+  postgres-db:
+    driver: local
