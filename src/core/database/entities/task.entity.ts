@@ -4,7 +4,7 @@ import { BaseEntity } from '../base';
 import { User } from './user.entity';
 
 @Entity({ tableName: 'tasks' })
-export class Task extends BaseEntity {
+export class Task extends BaseEntity<'deadline' | 'status'> {
   @Property({ nullable: false, type: 'varchar' })
   title: string;
 
@@ -12,7 +12,10 @@ export class Task extends BaseEntity {
   description: string;
 
   @Enum(() => ETaskStatus)
-  status: ETaskStatus;
+  status? = ETaskStatus.NotYet;
+
+  @Property({ type: 'timestamp', nullable: true, default: null })
+  deadline?: Date;
 
   @ManyToOne({ entity: () => User })
   user: User;

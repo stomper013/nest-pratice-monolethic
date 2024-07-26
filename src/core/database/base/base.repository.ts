@@ -6,16 +6,22 @@ import {
   FilterQuery,
   FindOneOptions,
   FindOptions,
+  Loaded,
 } from '@mikro-orm/postgresql';
 import { HttpException, HttpStatus } from '@nestjs/common';
 
 export class BaseRepository {
-  async getOne<Entity extends object>(
+  async getOne<
+    Entity extends object,
+    Hint extends string = never,
+    Fields extends string = '*',
+    Excludes extends string = never,
+  >(
     em: EntityManager,
     entity: EntityName<Entity>,
     where?: FilterQuery<NoInfer<Entity>>,
-    options?: FindOneOptions<Entity>,
-  ): Promise<Entity> {
+    options?: FindOneOptions<Entity, Hint, Fields, Excludes>,
+  ): Promise<Loaded<Entity, Hint, Fields, Excludes>> {
     try {
       const record = await em.findOne(entity, where, options);
       return record;
@@ -27,12 +33,17 @@ export class BaseRepository {
     }
   }
 
-  async getMany<Entity extends object>(
+  async getMany<
+    Entity extends object,
+    Hint extends string = never,
+    Fields extends string = '*',
+    Excludes extends string = never,
+  >(
     em: EntityManager,
     entity: EntityName<Entity>,
     where?: FilterQuery<NoInfer<Entity>>,
-    options?: FindOptions<Entity>,
-  ): Promise<Array<Entity>> {
+    options?: FindOptions<Entity, Hint, Fields, Excludes>,
+  ): Promise<Array<Loaded<Entity, Hint, Fields, Excludes>>> {
     try {
       const record = await em.find(entity, where, options);
 
@@ -45,19 +56,25 @@ export class BaseRepository {
     }
   }
 
-  async getPaginate<Entity extends object>(
+  async getPaginate<
+    Entity extends object,
+    Hint extends string = never,
+    Fields extends string = '*',
+    Excludes extends string = never,
+  >(
     em: EntityManager,
     entity: EntityName<Entity>,
     paginate: IPagination,
     where?: FilterQuery<NoInfer<Entity>>,
-    options?: FindOptions<Entity>,
-  ): Promise<IPaginationResponse<Entity>> {
+    options?: FindOptions<Entity, Hint, Fields, Excludes>,
+  ): Promise<IPaginationResponse<Loaded<Entity, Hint, Fields, Excludes>>> {
     try {
       const { page, size } = paginate;
-      const optionPaginate: FindOptions<Entity> = Object.assign(options, {
-        offset: (page - 1) * size,
-        limit: size,
-      });
+      const optionPaginate: FindOptions<Entity, Hint, Fields, Excludes> =
+        Object.assign(options, {
+          offset: (page - 1) * size,
+          limit: size,
+        });
 
       const [records, total] = await em.findAndCount(
         entity,
