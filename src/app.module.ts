@@ -1,3 +1,4 @@
+import { LoggerModule } from '@core/utils';
 import configuration from '@core/config/configuration';
 import { DatabaseModule } from '@core/database';
 import { Module } from '@nestjs/common';
@@ -15,6 +16,7 @@ const appModules = [AuthModule, UserModule, TaskModule];
       load: [configuration],
     }),
     DatabaseModule,
+    LoggerModule,
     ...appModules,
   ],
 })

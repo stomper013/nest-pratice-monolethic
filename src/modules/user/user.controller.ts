@@ -13,6 +13,11 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @Post('error')
+  async getError(): Promise<void> {
+    return this.userService.getError();
+  }
+
   @Post('update/password')
   async updatePassword(
     @UserDecorator() user: IJwtPayload,

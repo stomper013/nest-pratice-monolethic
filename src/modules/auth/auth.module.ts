@@ -1,5 +1,5 @@
 import { User } from '@core/database/entities';
-import { CryptoModule, LoggerModule } from '@core/utils';
+import { CryptoModule } from '@core/utils';
 import { JwtStrategy } from '@core/utils/modules/jwt';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Module } from '@nestjs/common';
@@ -25,7 +25,6 @@ import { AuthService } from './auth.service';
       }),
     }),
     MikroOrmModule.forFeature([User]),
-    LoggerModule,
     CryptoModule,
     UserModule,
   ],

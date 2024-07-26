@@ -20,6 +20,11 @@ import { TaskService } from './task.service';
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
+  @Post('error')
+  async getError(): Promise<void> {
+    return this.taskService.getError();
+  }
+
   @Post('list')
   async getTasksByUserId(
     @UserDecorator() user: IJwtPayload,

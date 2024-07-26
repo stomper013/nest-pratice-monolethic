@@ -25,4 +25,9 @@ export class AuthController {
 
     return this.authService.validRefreshToken(refreshToken);
   }
+
+  @Post('error')
+  async getError(): Promise<void> {
+    return this.authService.getError();
+  }
 }

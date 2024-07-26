@@ -44,8 +44,22 @@ export class AuthService extends BaseRepository {
     this.getConfigJwt();
   }
 
+  getError(){
+    try {
+      throw new Error('TEST')
+    }catch(error){
+      this.logger.debug(error)
+      throw new HttpException(
+        error?.message || null,
+        error?.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
   getConfigJwt() {
     const jwtConfig = this.configService.get<IConfigJwt>('jwt');
+    console.log(jwtConfig);
+
 
     for (const key in jwtConfig) {
       let value = jwtConfig[key];

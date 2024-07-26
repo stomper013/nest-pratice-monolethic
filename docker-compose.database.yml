@@ -15,10 +15,10 @@ services:
     ports:
       - ${DB_PORT}:5432
     networks:
-      - mcud
+      - main
 
 networks:
-  mcud:
+  main:
     driver: bridge
 
 volumes:

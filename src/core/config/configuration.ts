@@ -5,8 +5,8 @@ export default () => ({
   environment: process.env.ENVIRONMENT || 'develop',
   rootApi: 'api',
   initAccount: {
-    username: process.env.INIT_USERNAME || 'mcud',
-    password: process.env.INIT_PWD || 'mcud_assessment',
+    username: process.env.INIT_USERNAME || 'admin',
+    password: process.env.INIT_PWD || '123',
   },
   db: {
     postgres: {
@@ -19,9 +19,9 @@ export default () => ({
     },
   },
   jwt: {
-    secretKey: process.env.SECRET_KEY || 'mcud_assessment_secret_key',
+    secretKey: process.env.SECRET_KEY || 'abcxyz',
     refreshSecretKey:
-      process.env.RF_SECRET_KEY || 'mcud_assessment_refresh_secret_key',
+      process.env.RF_SECRET_KEY || 'abcxyz',
     jwtSecretExpirePeriod: process.env.JWT_SECRET_EXPIRE_PERIOD || 1,
     jwtRefreshSecretExpirePeriod:
       process.env.JWT_REFRESH_SECRET_EXPIRE_PERIOD || 7,

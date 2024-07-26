@@ -26,6 +26,18 @@ export class UserService extends BaseRepository implements OnModuleInit {
     this.logger.setContext(this.serviceName);
   }
 
+  getError(){
+    try {
+      throw new Error('TEST')
+    }catch(error){
+      this.logger.debug(error)
+      throw new HttpException(
+        error?.message || null,
+        error?.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+  
   async onModuleInit() {
     const em = this.entityManager.fork();
     try {
