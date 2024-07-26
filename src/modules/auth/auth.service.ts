@@ -24,8 +24,8 @@ export class AuthService extends BaseRepository {
   private readonly serviceName: string = AuthService.name;
   private readonly logger: LoggerService;
 
-  private jwtSecretExpirePeriod = 86400;
-  private jwtRefreshSecretExpirePeriod = 604800;
+  private jwtSecretExpirePeriod: number;
+  private jwtRefreshSecretExpirePeriod: number;
   private secretKey: string;
   private refreshSecretKey: string;
 
@@ -42,6 +42,16 @@ export class AuthService extends BaseRepository {
     this.logger.setContext(this.serviceName);
 
     this.getConfigJwt();
+  }
+
+  getConfigJwt() {
+    const jwtConfig = this.configService.get<IConfigJwt>('jwt');
+
+    for (const key in jwtConfig) {
+      let value = jwtConfig[key];
+      if (!isNaN(value)) value = Number(value);
+      this[key] = value;
+    }
   }
 
   async getUserById(id: string): Promise<User | null> {
@@ -188,15 +198,5 @@ export class AuthService extends BaseRepository {
       accessExpiredAt: TimestampUtil.convertDateToSecond(accessExpiredDate),
       refreshExpiredAt: TimestampUtil.convertDateToSecond(refreshExpiredDate),
     };
-  }
-
-  getConfigJwt() {
-    const jwtConfig = this.configService.get<IConfigJwt>('jwt');
-
-    for (const key in jwtConfig) {
-      let value = jwtConfig[key];
-      if (!isNaN(value)) value = Number(value);
-      this[key] = value;
-    }
   }
 }
